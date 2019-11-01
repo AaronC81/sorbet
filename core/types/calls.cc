@@ -165,6 +165,8 @@ unique_ptr<Error> matchArgType(Context ctx, TypeConstraint &constr, Loc callLoc,
                                 argSym.argumentName(ctx), expectedType->show(ctx)),
             }));
         }
+
+        // Determine whether the method definition is a source of the error
         bool variablePossiblyUninitialized = false;
         for (int i = 0; i < argTpe.origins.size(); i++) {
             if (ctx.owner.data(ctx)->loc() == argTpe.origins[i]) {
