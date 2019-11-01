@@ -37,7 +37,7 @@ test/cli/errors/errors.rb:33: Expected `Integer` but found `T.nilable(Integer)` 
     test/cli/errors/errors.rb:36: Method `ErrorLines#bar` has specified `a` as `Integer`
     .. |  sig {params(a: Integer).returns(Integer)}
                       ^
-  Got T.nilable(Integer) originating from:
+  Got T.nilable(Integer) - is the variable initialized on all paths?
     test/cli/errors/errors.rb:26:
     .. |  def main(foo)
           ^^^^^^^^^^^^^
@@ -91,7 +91,7 @@ test/cli/errors/errors.rb:33: Expected `Integer` but found `T.nilable(Integer)` 
     test/cli/errors/errors.rb:36: Method `ErrorLines#bar` has specified `a` as `Integer`
     .. |  sig {params(a: Integer).returns(Integer)}
                       ^
-  Got T.nilable(Integer) originating from:
+  Got T.nilable(Integer) - is the variable initialized on all paths?
     test/cli/errors/errors.rb:26:
     .. |  def main(foo)
           ^^^^^^^^^^^^^
@@ -145,7 +145,7 @@ test/cli/errors/errors.rb:33: Expected `Integer` but found `T.nilable(Integer)` 
     test/cli/errors/errors.rb:36: Method `ErrorLines#bar` has specified `a` as `Integer`
     .. |  sig {params(a: Integer).returns(Integer)}
                       ^
-  Got T.nilable(Integer) originating from:
+  Got T.nilable(Integer) - is the variable initialized on all paths?
     test/cli/errors/errors.rb:26:
     .. |  def main(foo)
           ^^^^^^^^^^^^^

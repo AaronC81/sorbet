@@ -165,8 +165,22 @@ unique_ptr<Error> matchArgType(Context ctx, TypeConstraint &constr, Loc callLoc,
                                 argSym.argumentName(ctx), expectedType->show(ctx)),
             }));
         }
-        e.addErrorSection(
-            ErrorSection("Got " + argTpe.type->show(ctx) + " originating from:", argTpe.origins2Explanations(ctx)));
+        bool variablePossiblyUninitialized = false;
+        for (int i = 0; i < argTpe.origins.size(); i++) {
+            if (ctx.owner.data(ctx)->loc() == argTpe.origins[i]) {
+                variablePossiblyUninitialized = true;
+                break;
+            }
+        }
+        if (variablePossiblyUninitialized) {
+            e.addErrorSection(
+                ErrorSection("Got " + argTpe.type->show(ctx) + " - is the variable initialized on all paths?",
+                             argTpe.origins2Explanations(ctx)));
+        } else {
+            e.addErrorSection(
+                ErrorSection("Got " + argTpe.type->show(ctx) + " originating from:", argTpe.origins2Explanations(ctx)));
+        }
+
         auto withoutNil = Types::approximateSubtract(ctx, argTpe.type, Types::nilClass());
         if (!withoutNil->isBottom() &&
             Types::isSubTypeUnderConstraint(ctx, constr, withoutNil, expectedType, UntypedMode::AlwaysCompatible)) {
